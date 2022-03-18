@@ -10,7 +10,7 @@ public class NBody {
     int num = in.readInt();
     in.readDouble();
     // System.out.println(num);
-    Planet[] planets = new Planet[5];
+    Planet[] planets = new Planet[num];
     for (int i = 0; i < num; i++) {
       Planet temp = new Planet(in.readDouble(), in.readDouble(), in.readDouble(), in.readDouble(), in.readDouble(),
           in.readString());
