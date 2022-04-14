@@ -82,6 +82,13 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
+        
+        /** If A == null, return B. */
+        if (A == null){
+            return B;
+        }
+
+        /** Stores the header temporarily. */
         IntList header = A;
         while(A.rest != null){
             A = A.rest;
