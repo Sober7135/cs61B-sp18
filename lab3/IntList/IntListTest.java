@@ -66,6 +66,27 @@ public class IntListTest {
         assertEquals(IntList.of(1, 2, 3), A);
     }
 
+    @Test
+    public void testReserve() {
+        IntList A = IntList.of(1, 2, 4);
+        IntList B = IntList.of(33, 44, 55, 99);
+        IntList C = IntList.of(1, 2);
+        IntList D = IntList.of(1);
+        IntList E = null;
+
+        IntList exp1 = IntList.of(4, 2, 1);
+        IntList exp2 = IntList.of(99, 55, 44, 33);
+        IntList exp3 = IntList.of(2, 1);
+        IntList exp4 = IntList.of(1);
+        IntList exp5 = null;
+
+        assertEquals(exp1, IntList.reverse(A));
+        assertEquals(exp2, IntList.reverse(B));
+        assertEquals(exp3, IntList.reverse(C));
+        assertEquals(exp4, IntList.reverse(D));
+        assertEquals(exp5, IntList.reverse(E));
+    }
+
     /** If you're running this from the command line, you'll need
       * to add a main method. See ArithmeticTest.java for an
       * example. */
