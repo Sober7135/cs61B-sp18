@@ -32,7 +32,7 @@ public class LinkedListDeque<T> {
 
     /** Adds an item of type T to the back of the deque. */
     public void addLast(T x) {
-        sentinel.prev = new Node(sentinel.next, x, sentinel);
+        sentinel.prev = new Node(sentinel.prev, x, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
         size++;
     }
