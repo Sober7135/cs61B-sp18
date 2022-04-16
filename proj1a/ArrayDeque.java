@@ -46,7 +46,7 @@ public class ArrayDeque<T> {
 
     /** Prints the items in the deque from first to last, separated by a space. */
     public void printDeque() {
-        if (nextFirst >= nextLast) {
+        if ((nextFirst + 1) % items.length >= nextLast) {
             for (int i = (nextFirst + 1) % items.length; i < items.length; i++) {
                 System.out.print(items[i] + " ");
             }
@@ -54,7 +54,7 @@ public class ArrayDeque<T> {
                 System.out.print(items[i] + " ");
             }
         } else {
-            for (int i = nextFirst + 1; i < nextLast; i++) {
+            for (int i = (nextFirst + 1) % items.length; i < nextLast; i++) {
                 System.out.print(items[i] + " ");
             }
         }
@@ -95,13 +95,16 @@ public class ArrayDeque<T> {
     /**  Gets the item at the given index, where 0 is the front, 1 is the next item,
      *  and so forth. If no such item exists, returns null. Must not alter the deque! */
     public T get(int index) {
+        if (index >= size) {
+            return null;
+        }
         return items[(index + nextFirst + 1) % items.length];
     }
 
     /** Resizes the array. */
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        if (nextFirst >= nextLast) {
+        if (nextFirst + 1 >= nextLast) {
             System.arraycopy(items, (nextFirst + 1) % items.length, a,
                     0, items.length - nextFirst - 1);
             System.arraycopy(items, 0, a, items.length - nextFirst - 1,
@@ -110,7 +113,7 @@ public class ArrayDeque<T> {
             System.arraycopy(items, nextFirst + 1, a, 0, size);
         }
         items = a;
-        nextFirst = items.length;
+        nextFirst = items.length - 1;
         nextLast = size;
     }
 }
