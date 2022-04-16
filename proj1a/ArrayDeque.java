@@ -31,7 +31,7 @@ public class ArrayDeque<T> {
         items[nextLast] = item;
         size++;
         nextLast = (nextLast + 1) % items.length;
-        nextFirst = (nextLast - size - 1 + items.length) % items.length;
+        nextFirst = (nextLast - size - 1 + 2 * items.length) % items.length;
     }
 
     /** Returns true if deque is empty, false otherwise. */
@@ -66,6 +66,9 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+        if (size < items.length / 2) {
+            resize(items.length / 2);
+        }
 
         /** The nextFirst + 1 maybe bigger than length of the array. */
         int index = (nextFirst + 1) % items.length;
@@ -81,6 +84,9 @@ public class ArrayDeque<T> {
     public T removeLast() {
         if (isEmpty()) {
             return null;
+        }
+        if (size < items.length / 2) {
+            resize(items.length / 2);
         }
 
         /** The nextLast + 1 maybe smaller than 0. */
@@ -104,13 +110,13 @@ public class ArrayDeque<T> {
     /** Resizes the array. */
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        if (nextFirst + 1 >= nextLast) {
+        if ((nextFirst + 1) % items.length >= nextLast) {
             System.arraycopy(items, (nextFirst + 1) % items.length, a,
                     0, items.length - nextFirst - 1);
             System.arraycopy(items, 0, a, items.length - nextFirst - 1,
                     size - (items.length - nextFirst - 1));
         } else {
-            System.arraycopy(items, nextFirst + 1, a, 0, size);
+            System.arraycopy(items, (nextFirst + 1) % items.length, a, 0, size);
         }
         items = a;
         nextFirst = items.length - 1;
