@@ -6,7 +6,7 @@ public class ArrayDeque<T> {
 
     /** Create an empty list. */
     public ArrayDeque() {
-        items = (T[]) new Object[100];
+        items = (T[]) new Object[8];
         size = 0;
         nextFirst = 0;
         nextLast = 0;
@@ -20,6 +20,7 @@ public class ArrayDeque<T> {
         items[nextFirst] = item;
         size++;
         nextFirst = (nextFirst - 1 + items.length) % items.length;
+        nextLast = (nextFirst + size + 1) % items.length;
     }
 
     /** Adds an item of type T to the back of the deque. */
@@ -30,6 +31,7 @@ public class ArrayDeque<T> {
         items[nextLast] = item;
         size++;
         nextLast = (nextLast + 1) % items.length;
+        nextFirst = (nextLast - size - 1 + items.length) % items.length;
     }
 
     /** Returns true if deque is empty, false otherwise. */
