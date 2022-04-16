@@ -99,7 +99,7 @@ public class LinkedListDeque<T> {
     }
 
     /** Helper */
-    public T getRecursive(Node ptr, int index) {
+    private T getRecursive(Node ptr, int index) {
         if (index == 0) {
             return ptr.item;
         }
