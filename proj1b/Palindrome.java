@@ -57,7 +57,7 @@ public class Palindrome {
     private boolean isPalindrome(Deque<Character> dq, CharacterComparator cc) {
         if (dq.size() == 0 || dq.size() == 1) {
             return true;
-        }else if (cc.equalChars(dq.removeLast(), dq.removeFirst())) {
+        } else if (cc.equalChars(dq.removeLast(), dq.removeFirst())) {
             return true;
         }
         return false;
